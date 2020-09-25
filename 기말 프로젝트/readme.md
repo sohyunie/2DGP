@@ -1,7 +1,7 @@
 # 2DGP
 2D Game Programming Project - final project
 
-### 1. 게임의 소개게
+### 1. 게임의 소개
 * ###### 제목: Cat-cher
 * ###### copy 게임: 쿠키런, 소닉
 쿠키런과 소닉은 런게임이다. 두 게임 모두 장애물을 피하여, 정해진 루트로 달려가는 게임이다. 
