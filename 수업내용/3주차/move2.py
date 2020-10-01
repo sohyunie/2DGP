@@ -1,3 +1,4 @@
+import random
 from pico2d import *
 import os
 os.chdir('d:/SoHyun/문서/2DGP/수업내용/3주차')
@@ -30,10 +31,11 @@ class Grass:
 
 class Boy:
 	#constructor 생성자, 객체가 생성되면 반드시 불리는 부분
-	def __init__(self, pos, delta):
-		self.x, self.y = pos
-		self.dx, self.dy = delta
-		self.fidx = 0 
+	def __init__(self):
+		self.x = random.randint(100, 100)
+		self.y = random.randint(100, 100)
+		self.dx, self.dy = random.random(), random.random() # 0.0 ~ 1.0 사이의 float return
+		self.fidx = random.randint(0, 7)
 		self.image = load_image(RES_DIR + '/run_animation.png')
 	def draw(self):
 		self.image.clip_draw(self.fidx * 100, 0, 100, 100, self.x, self.y)
@@ -43,41 +45,28 @@ class Boy:
 		self.fidx = (self.fidx + 1) % 8
 
 grass = Grass()
-boy = Boy((0, 85), (2, 0.1)) # 객체 생성, instantiation
-boy2 = Boy((0, 200), (1, 0.05))
+# boy = Boy((0, 85), (2, 0.1)) # 객체 생성, instantiation
+# boy = Boy()
+# boy2 = Boy((0, 200), (1, 0.05))
+team = [ Boy() for i in range(11) ]
+# for boy in team:
+#	boy.x = random.randint(100, 700)
+#	boy.y = random.randint(100, 500)
 
 running = True
 while running:
-	# 메인 게임루프는 어떤 오브젝트들이 있는지만 가지고 걔네들을 조율하는 역할
-	# 구체적인 것 boy를 어떻게 그려야 하고 어떻게 업데이트 해야하는지는 각각의 class에 맡긴다. 
-	# 앞으로 요구사항이 변경되었을 때 수정하기 더 용이해진다. 
-	# 다형성 - 일 시키는 사람은 구체적으로 어떤 일이 실행되는지 모른다. 시키는 사람은 모르고 시킨다. 
 	clear_canvas()
 	grass.draw()
-	boy.draw()
-	boy2.draw()
+	for boy in team:
+		boy.draw()
 	update_canvas()
 
 	handle_events()
-
-	boy.update()
-	boy2.update()
+	for boy in team:
+		boy.update()
+	# boy2.update()
 	grass.update()
 
-	if boy.x > get_canvas_width():
-		running = False
+	delay (0.03)
 
-	delay (0.01)
-
-# delay(2) # in seconds
-# frame animation
 close_canvas()
-
-# game loop:
-#	- update() - logic
-#	- draw() - render
-
-# game loop:
-#	- update() - logic
-# 	- event handling
-#	- draw() - render
