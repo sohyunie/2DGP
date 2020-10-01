@@ -16,7 +16,7 @@ def handle_events():
 
 open_canvas()
 
-gra = load_image(RES_DIR + '/grass.png')
+# gra = load_image(RES_DIR + '/grass.png')
 # cha2 = load_image(RES_DIR + '/character.png')
 
 class Grass:
@@ -24,6 +24,10 @@ class Grass:
 		self.image = load_image(RES_DIR + '/grass.png')
 	def draw(self):
 		self.image.draw(400, 30)
+	# update는 필요없지만 함수를 만들어두는 게 필요할 수 있다. 
+	def update(self):
+		pass
+
 class Boy:
 	#constructor 생성자, 객체가 생성되면 반드시 불리는 부분
 	def __init__(self, pos, delta):
@@ -58,6 +62,7 @@ while running:
 
 	boy.update()
 	boy2.update()
+	grass.update()
 
 	if boy.x > get_canvas_width():
 		running = False
