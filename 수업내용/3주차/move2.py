@@ -1,11 +1,11 @@
-import random
 from pico2d import *
+from gobj import *
 import os
 os.chdir('d:/SoHyun/문서/2DGP/수업내용/3주차')
 
-RES_DIR = '../res'
 
-# 동작의 추상화 - 함수 만들기, 클래스 생성 -> 코드 중복 방지 가능
+
+# extract to function
 def handle_events():
 	global running
 	evts = get_events()
@@ -20,29 +20,8 @@ open_canvas()
 # gra = load_image(RES_DIR + '/grass.png')
 # cha2 = load_image(RES_DIR + '/character.png')
 
-class Grass:
-	def __init__(self):
-		self.image = load_image(RES_DIR + '/grass.png')
-	def draw(self):
-		self.image.draw(400, 30)
-	# update는 필요없지만 함수를 만들어두는 게 필요할 수 있다. 
-	def update(self):
-		pass
+# class로 만든 것을 다른 파일로 빼낼 수 있다. 파이썬에서는 파일 하나를 모듈이라고 부르기도 한다. 
 
-class Boy:
-	#constructor 생성자, 객체가 생성되면 반드시 불리는 부분
-	def __init__(self):
-		self.x = random.randint(100, 100)
-		self.y = random.randint(100, 100)
-		self.dx, self.dy = random.random(), random.random() # 0.0 ~ 1.0 사이의 float return
-		self.fidx = random.randint(0, 7)
-		self.image = load_image(RES_DIR + '/run_animation.png')
-	def draw(self):
-		self.image.clip_draw(self.fidx * 100, 0, 100, 100, self.x, self.y)
-	def update(self):
-		self.x += self.dx
-		self.y += self.dy
-		self.fidx = (self.fidx + 1) % 8
 
 grass = Grass()
 # boy = Boy((0, 85), (2, 0.1)) # 객체 생성, instantiation

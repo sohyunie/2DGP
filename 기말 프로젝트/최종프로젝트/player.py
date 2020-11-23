@@ -224,12 +224,12 @@ class Player:
             self.cookie_index = 0
         else:
             cookie = self.cookie_chars[self.cookie_index]
-            sheet = '../w09-res/out/%s.png' % cookie["id"]
+            sheet = '../최종프로젝트-res/out/%s.png' % cookie["id"]
             gfw.image.unload(sheet)
             self.cookie_index = (self.cookie_index + diff) % len(self.cookie_chars)
 
         cookie = self.cookie_chars[self.cookie_index]
-        sheet = '../w09-res/out/%s.png' % cookie["id"]
+        sheet = '../최종프로젝트-res/out/%s.png' % cookie["id"]
         self.image = gfw.image.load(sheet)
         global PLAYER_SIZE
         prev_size = PLAYER_SIZE

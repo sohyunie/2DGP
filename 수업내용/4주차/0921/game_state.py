@@ -1,7 +1,7 @@
+import gfw
 from pico2d import *
 from gobj import *
-import os
-os.chdir('d:/SoHyun/문서/2DGP/수업내용/3주차')
+import title_state
 
 # 프로그램마다 달라지는 부분을 이곳에 쓸 것이다.
 def enter():
@@ -17,8 +17,13 @@ def draw():
 	for b in team: b.draw()
 
 def handle_event(e):
-	global running
-	if e.type== SDL_QUIT:
-		running= False
+	if e.type == SDL_QUIT:
+		gfw.quit()
 	elif(e.type, e.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
-		running False
+		gfw.pop()
+
+def exit():
+	pass
+
+if __name__=='__main__':
+	gfw.run_main()

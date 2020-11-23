@@ -104,7 +104,7 @@ class InfiniteBackground(Background):
         self.q1origin = q3w, q3h
 
     def draw(self):
-        self.image.clip_draw_to_origin(*self.q3rect, 0, 0)
+        #self.image.clip_draw_to_origin(*self.q3rect, 0, 0)
         self.image.clip_draw_to_origin(*self.q2rect, *self.q2origin)
         self.image.clip_draw_to_origin(*self.q4rect, *self.q4origin)
         self.image.clip_draw_to_origin(*self.q1rect, *self.q1origin)
@@ -167,7 +167,8 @@ class HorzScrollBackground:
         return x + self.scroll, y
 
     def get_boundary(self):
-        return (-sys.maxsize, -sys.maxsize, sys.maxsize, sys.maxsize)
+        pass
+        #return (-sys.maxsize, -sys.maxsize, sys.maxsize, sys.maxsize)
 
     #     self.image.clip_draw_to_origin(*self.src_rect_1, *self.dst_rect_1)
     #     self.image.clip_draw_to_origin(*self.src_rect_2, *self.dst_rect_2)
