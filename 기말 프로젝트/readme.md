@@ -126,3 +126,26 @@
 7주차 | 밸런스 조절 및 사운드 추가 | 게임 내 밸런스 조절과 사운드 추가
 8주차 | 마무리 | 최종 점검 및 릴리즈
  
+### 12. 현재까지 진행상황
+* #### 게임 리소스 파일수집: 50%
+* #### 충돌처리 : 40%
+* #### 애니메이션 : 60%
+* #### 캐릭터 움직임 : 80%
+* 그외 추가 구현해야 할 것들
+ * ##### 게임 컨셉에 맞는 리소스 파일 추가 수집 (스테이트 별 배경 이미지나 오브젝트들)
+ * ##### 충동 이후 캐릭터 애니메이션과 hp에 관한 처리 
+ * ##### 맵 제작 - obstacle과 platform 배치 
+ * ##### 상점, 메인 스테이트, 게임 종료화면 구현 (상호작용처리 - handle/mouse event)
+ * ##### 갈 길이 멀다...
+ 
+### 13. main game state에 등장하는 game object
+* #### class 구성 정보
+ * ##### 동작 구성 | Player, Animation object
+ * ##### 그림 구성 | Background, Obstacle, Platform
+ * ##### 상호작용 정보 | Player와 obstacle, platform간의 충돌 및 boundary 체크 
+* #### class가 가지는 핵심 코드에 대한 설명
+ * ##### player: jump와 slide 같은 기본동작 구현, platform위치를 인지하여 움직이도록 함. handle event를 받아서 움직임
+ * ##### animation object: 매 프레임마다 애니메이션을 가지는 오브젝트들에 대한 움직임 구현
+ * ##### background: 게임 내 background에 해당하는 이미지 파일을 그리는 함수
+ * ##### obstacle: json파일을 읽어와서 할당된 위치에 장애물 배치
+ * ##### platform: 맵 내의 지형을 구성하는 요소 (josn파일을 통해 배치)
