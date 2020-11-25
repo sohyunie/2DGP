@@ -140,12 +140,12 @@
  
 ### 13. main game state에 등장하는 game object
 * #### class 구성 정보
- * ##### 동작 구성 | Player, Animation object
- * ##### 그림 구성 | Background, Obstacle, Platform
- * ##### 상호작용 정보 | Player와 obstacle, platform간의 충돌 및 boundary 체크 
+  * ##### 동작 구성 | Player, Animation object
+  * ##### 그림 구성 | Background, Obstacle, Platform
+  * ##### 상호작용 정보 | Player와 obstacle, platform간의 충돌 및 boundary 체크 
 * #### class가 가지는 핵심 코드에 대한 설명
- * ##### player: jump와 slide 같은 기본동작 구현, platform위치를 인지하여 움직이도록 함. handle event를 받아서 움직임
- * ##### animation object: 매 프레임마다 애니메이션을 가지는 오브젝트들에 대한 움직임 구현
- * ##### background: 게임 내 background에 해당하는 이미지 파일을 그리는 함수
- * ##### obstacle: json파일을 읽어와서 할당된 위치에 장애물 배치
- * ##### platform: 맵 내의 지형을 구성하는 요소 (josn파일을 통해 배치)
+  * ##### player: jump와 slide 같은 기본동작 구현, platform위치를 인지하여 움직이도록 함. handle event를 받아서 움직임
+  * ##### animation object: 매 프레임마다 애니메이션을 가지는 오브젝트들에 대한 움직임 구현
+  * ##### background: 게임 내 background에 해당하는 이미지 파일을 그리는 함수
+  * ##### obstacle: json파일을 읽어와서 할당된 위치에 장애물 배치
+  * ##### platform: 맵 내의 지형을 구성하는 요소 (josn파일을 통해 배치)
