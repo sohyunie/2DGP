@@ -9,7 +9,6 @@ canvas_width = 1120
 canvas_height = 630
 
 def start(theme):
-    gfw.pop()
     horz_state.theme = theme
     #horz_state.enter()
     gfw.push(horz_state)
@@ -32,7 +31,7 @@ def build_world():
 
     font = gfw.font.load(gobj.res('ENCR10B.TTF'), 40)
     l,b,w,h = 600,450,get_canvas_width()/3 + 90,80
-    btn = Button(l,b,w,h,font,"retry game", lambda: start("horz_state"))
+    btn = Button(l,b,w,h,font,"retry game", lambda: gfw.pop())
     gfw.world.add(gfw.layer.ui, btn)
 
     value = 'save score : %.lf' %horz_state.score

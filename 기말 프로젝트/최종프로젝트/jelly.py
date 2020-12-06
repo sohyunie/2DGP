@@ -18,8 +18,8 @@ class Jelly:
     TYPE_1, TYPE_2, TYPE_3, TYPE_R = range(4)
     def __init__(self, type, x, y):
         self.x, self.y = x, y
-        self.image = gfw.image.load(gobj.res('jelly.png'))
-        index = random.randint(3, 60) if type == Jelly.TYPE_R else type
+        self.image = gfw.image.load(gobj.res('coin.png'))
+        index = random.randint(1, 1) if type == Jelly.TYPE_R else type
         self.rect = get_jelly_rect(index)
     def update(self): pass
     def draw(self):

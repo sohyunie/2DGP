@@ -12,7 +12,6 @@ import stage_gen
 from button import Button
 import gameover_state
 
-
 canvas_width = 1120
 canvas_height = 630
 score = 0
@@ -22,6 +21,10 @@ def start(theme):
     gfw.push(gameover_state)
 
 def enter():
+    #global bg_music
+    #bg_music = load_wav(gobj.res('sound/InGameMusic.wav'))
+    #bg_music.set_volume(20)
+    # bg_music.repeat_play()
     gfw.world.init(['bg', 'platform', 'enemy', 'item', 'player', 'ui'])
 
     center = get_canvas_width() // 2, get_canvas_height() // 2
@@ -63,6 +66,10 @@ def check_items():
     global score
     for item in gfw.world.objects_at(gfw.layer.item):
         if gobj.collides_box(player, item):
+            global jellySound
+            jellySound = load_music(gobj.res('sound/Jelly.wav'))
+            jellySound.set_volume(10)
+            jellySound.play()
             score += 10
             print(score)
             gfw.world.remove(item)
@@ -79,7 +86,7 @@ def check_obstacles():
             enemy.hit = True
     if heart <= 0:
         paused = True
-        gfw.pop()
+        #gfw.pop()
         print("heart is 0")
         start("gameover_state")
 
@@ -141,7 +148,7 @@ def pause():
     pass
 
 def resume():
-    build_world()
+    pass
 
 def exit():
     pass

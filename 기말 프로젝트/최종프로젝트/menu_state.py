@@ -7,14 +7,13 @@ import horz_state
 canvas_width = 1120
 canvas_height = 630
 
-def start(theme):
-    horz_state.theme = theme
-    gfw.push(horz_state)
-
 def passDef():
     pass
 
 def build_world():
+    bg_music.set_volume(10)
+    bg_music.repeat_play()
+
     gfw.world.init(['bg', 'ui'])
 
     center = (canvas_width//2, canvas_height//2)
@@ -26,11 +25,13 @@ def build_world():
     btn = Button(l,b,w,h,font,"Play game", lambda: start("horz_state"))
     gfw.world.add(gfw.layer.ui, btn)
 
-    #l,b,w,h = 670,20,get_canvas_width()/3,400
-    #btn = Button(l,b,w,h,font, value, lambda: passDef())
-    #gfw.world.add(gfw.layer.ui, btn)
+def start(theme):
+    horz_state.theme = theme
+    gfw.push(horz_state)
 
 def enter():
+    global bg_music
+    bg_music = load_wav(gobj.res('sound/LobbyMusic.wav'))
     build_world()
 
 def update():
@@ -39,8 +40,7 @@ def update():
 def draw():
     gfw.world.draw()
     f = open('res/ScoreFile.txt', 'r') 
-    memo = f.read() 
-    print(memo) 
+    memo = f.read()
     f.close()
     font = gfw.font.load(gobj.res('ENCR10B.TTF'), 20)
     font.draw(670, 350, 'Score List \n%s' % memo)
@@ -82,7 +82,7 @@ def pause():
     pass
 
 def resume():
-    build_world()
+    pass
 
 if __name__ == '__main__':
     gfw.run_main()

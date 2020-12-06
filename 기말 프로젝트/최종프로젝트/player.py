@@ -93,6 +93,10 @@ class Player:
         self.mag_speed = -1.0
 
     def jump(self):
+        global jumpSound
+        jumpSound = load_music(gobj.res('sound/Jump.wav'))
+        jumpSound.set_volume(10) 
+        jumpSound.play()
         if self.state in [Player.FALLING, Player.DOUBLE_JUMP, Player.SLIDING]: 
             return
         if self.state == Player.RUNNING:
