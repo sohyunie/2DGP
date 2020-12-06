@@ -83,9 +83,9 @@ class Player:
         size = PLAYER_SIZE * self.mag, PLAYER_SIZE * self.mag
         self.image.clip_draw(x, y, PLAYER_SIZE, PLAYER_SIZE, *self.pos, *size)
 
-        if self.cookie_time < 3.0:
-            font = gfw.font.load(gobj.res('ENCR10B.TTF'), 30)
-            font.draw(20, 20, self.cookie_name)
+        #if self.cookie_time < 3.0:
+        #    font = gfw.font.load(gobj.res('ENCR10B.TTF'), 30)
+        #    font.draw(20, 20, self.cookie_name)
 
     def magnify(self):
         self.mag_speed = 1.0

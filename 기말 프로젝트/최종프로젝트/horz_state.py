@@ -9,13 +9,20 @@ from jelly import Jelly
 from heart import Heart
 import pickle
 import stage_gen
+from button import Button
+import gameover_state
+
 
 canvas_width = 1120
 canvas_height = 630
 score = 0
 heart = 10
+def start(theme):
+    gameover_state.theme = theme
+    gfw.push(gameover_state)
+
 def enter():
-    gfw.world.init(['bg', 'platform', 'enemy', 'item', 'player'])
+    gfw.world.init(['bg', 'platform', 'enemy', 'item', 'player', 'ui'])
 
     center = get_canvas_width() // 2, get_canvas_height() // 2
 
@@ -29,6 +36,9 @@ def enter():
     player = Player()
     player.bg = bg
     gfw.world.add(gfw.layer.player, player)
+
+    score = 0
+    heart = 10
 
     stage_gen.load(gobj.res('stage_01.txt'))
 
@@ -67,6 +77,11 @@ def check_obstacles():
             print(heart)
             print('Hit', enemy)
             enemy.hit = True
+    if heart <= 0:
+        paused = True
+        gfw.pop()
+        print("heart is 0")
+        start("gameover_state")
 
 def draw():
     gfw.world.draw()
@@ -101,13 +116,32 @@ def handle_event(e):
         elif e.key == SDLK_p:
             global paused
             paused = not paused
-
+    #if handle_mouse(e):
+    #    return
     if player.handle_event(e):
         return
 
-def gameOver():
-    with open('c:/programing/python/data/ex_memo.txt', 'w') as f:
-        f.write(heart+"\n")
+capture = None 
+def handle_mouse(e):
+    global capture
+    if capture is not None:
+        holding = capture.handle_event(e)
+        if not holding:
+            capture = None
+        return True
+
+    for obj in gfw.world.objects_at(gfw.layer.ui):
+        if obj.handle_event(e):
+            capture = obj
+            return True
+
+    return False
+
+def pause():
+    pass
+
+def resume():
+    build_world()
 
 def exit():
     pass

@@ -2,33 +2,43 @@ from pico2d import *
 import gfw
 import gobj
 from button import Button
+import menu_state
 import horz_state
 
 canvas_width = 1120
 canvas_height = 630
 
 def start(theme):
+    gfw.pop()
     horz_state.theme = theme
+    #horz_state.enter()
     gfw.push(horz_state)
 
-def passDef():
-    pass
+def menuStart(theme):
+    with open('res/ScoreFile.txt', 'a') as f:
+        #print(horz_state.score)
+        f.write(str(horz_state.score)+"\n")
+    f.close()
+
+    menu_state.theme = theme
+    gfw.push(menu_state)
 
 def build_world():
     gfw.world.init(['bg', 'ui'])
 
     center = (canvas_width//2, canvas_height//2)
-    bg = gobj.ImageObject('lobbyBG.png', center)
+    bg = gobj.ImageObject('gameover.png', center)
     gfw.world.add(gfw.layer.bg, bg)
 
     font = gfw.font.load(gobj.res('ENCR10B.TTF'), 40)
-    l,b,w,h = 670,450,get_canvas_width()/3,80
-    btn = Button(l,b,w,h,font,"Play game", lambda: start("horz_state"))
+    l,b,w,h = 600,450,get_canvas_width()/3 + 90,80
+    btn = Button(l,b,w,h,font,"retry game", lambda: start("horz_state"))
     gfw.world.add(gfw.layer.ui, btn)
 
-    #l,b,w,h = 670,20,get_canvas_width()/3,400
-    #btn = Button(l,b,w,h,font, value, lambda: passDef())
-    #gfw.world.add(gfw.layer.ui, btn)
+    value = 'save score : %.lf' %horz_state.score
+    l,b,w,h = 600,250,get_canvas_width()/3 + 90,80
+    btn = Button(l,b,w,h,font, value, lambda: menuStart("menu_state"))
+    gfw.world.add(gfw.layer.ui, btn)
 
 def enter():
     build_world()
@@ -38,13 +48,6 @@ def update():
 
 def draw():
     gfw.world.draw()
-    f = open('res/ScoreFile.txt', 'r') 
-    memo = f.read() 
-    print(memo) 
-    f.close()
-    font = gfw.font.load(gobj.res('ENCR10B.TTF'), 20)
-    font.draw(670, 350, 'Score List \n%s' % memo)
-
     
 def handle_event(e):
     # prev_dx = boy.dx
