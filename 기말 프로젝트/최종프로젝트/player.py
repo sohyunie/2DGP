@@ -17,10 +17,17 @@ class Player:
     ]
     ANIMS_8x6 = [
         [ 0x40, 0x41, 0x42, 0x43 ], # RUNNING
-        [ 0x50 ],                   # FALLING
+        [ 0x16 ],                   # FALLING
         [ 0x01, 0x02, 0x03], # JUMPING
         [ 0x20, 0x21, 0x22, 0x23 ], # DOUBLE_JUMP
         [ 0x44, 0x45, 0x46, 0x47],             # SLIDING
+    ]
+    ANIMS_7x6 = [
+        [ 0x60, 0x61, 0x62, 0x63 ], # RUNNING
+        [ 0x16 ],                   # FALLING
+        [ 0x41, 0x44, 0x45], # JUMPING
+        [ 0x43, 0x43 ], # DOUBLE_JUMP
+        [ 0x46, 0x46],  # SLIDING
     ]
     ANIMS_13x6 = [
         [ 0x40, 0x41, 0x42, 0x43 ], # RUNNING
@@ -71,8 +78,8 @@ class Player:
         fidx = round(self.time * self.FPS) % len(anim)
         sprite_num = anim[fidx]
         x, y = sprite_num % 0x10, sprite_num // 0x10
-        x = x * (PLAYER_SIZE + 2) + 2
-        y = y * (PLAYER_SIZE + 2) + 2
+        x = x * (PLAYER_SIZE + 4) + 10
+        y = y * (PLAYER_SIZE + 4) + 10
         size = PLAYER_SIZE * self.mag, PLAYER_SIZE * self.mag
         self.image.clip_draw(x, y, PLAYER_SIZE, PLAYER_SIZE, *self.pos, *size)
 
@@ -235,7 +242,7 @@ class Player:
         prev_size = PLAYER_SIZE
         PLAYER_SIZE = cookie["size"]
         #self.anims = Player.ANIMS_11x6 if cookie["xcount"] == 11 else Player.ANIMS_13x6
-        self.anims = Player.ANIMS_8x6
+        self.anims = Player.ANIMS_7x6
 
         x,y = self.pos
         diff = (PLAYER_SIZE - prev_size) // 2

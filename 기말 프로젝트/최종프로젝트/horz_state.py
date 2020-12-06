@@ -6,16 +6,20 @@ from player import Player
 from background import HorzScrollBackground
 from platform import Platform
 from jelly import Jelly
+from heart import Heart
+import pickle
 import stage_gen
 
 canvas_width = 1120
 canvas_height = 630
-
+score = 0
+heart = 10
 def enter():
     gfw.world.init(['bg', 'platform', 'enemy', 'item', 'player'])
 
     center = get_canvas_width() // 2, get_canvas_height() // 2
 
+    # GameController
     for n, speed in [(1,10), (2,100), (3,150)]:
         bg = HorzScrollBackground('cookie_run_bg_%d.png' % n)
         bg.speed = speed
@@ -46,22 +50,37 @@ def update():
     stage_gen.update(dx)
 
 def check_items():
+    global score
     for item in gfw.world.objects_at(gfw.layer.item):
         if gobj.collides_box(player, item):
+            score += 10
+            print(score)
             gfw.world.remove(item)
             break
 
 def check_obstacles():
+    global heart
     for enemy in gfw.world.objects_at(gfw.layer.enemy):
         if enemy.hit: continue
         if gobj.collides_box(player, enemy):
+            heart -= 1
+            print(heart)
             print('Hit', enemy)
             enemy.hit = True
 
 def draw():
     gfw.world.draw()
-    #gobj.draw_collision_box()
+    # UI
+    global score
+    font = gfw.font.load(gobj.res('ENCR10B.TTF'), 30)
+    font.draw(900, 540, 'Score: %.lf' % score)
+    for i in range(heart):
+        heartObj = Heart(1095 - (i * 50), 605)
+        heartObj.draw()
 
+    #with open('res/ScoreFile.txt', 'w') as f:
+    #    f.write(score+"\n")
+    #f.close()
 def handle_event(e):
     # prev_dx = boy.dx
     if e.type == SDL_QUIT:
@@ -85,6 +104,10 @@ def handle_event(e):
 
     if player.handle_event(e):
         return
+
+def gameOver():
+    with open('c:/programing/python/data/ex_memo.txt', 'w') as f:
+        f.write(heart+"\n")
 
 def exit():
     pass
