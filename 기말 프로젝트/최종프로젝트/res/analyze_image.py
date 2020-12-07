@@ -2,7 +2,7 @@ import pygame
 import json
 import sys
 
-with open('out/cookies.json', 'r') as f:
+with open('res/out/cookies.json', 'r') as f:
     cookies = json.load(f)
 
 transparent = (0, 0, 0, 0)
@@ -14,7 +14,7 @@ new_cookies = []
 n = 0
 for cookie in cookies:
     try:
-        image = pygame.image.load('out/%s.png' % cookie['id'])
+        image = pygame.image.load('res/out/%s.png' % cookie['id'])
     except:
         continue
     w = image.get_width()
@@ -68,6 +68,6 @@ for cookie in cookies:
 
     n += 1
 
-with open('out/cookies_3.json', 'w') as f:
+with open('res/out/cookies_3.json', 'w') as f:
     json.dump(new_cookies, f, indent=2)
 

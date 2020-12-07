@@ -4,6 +4,7 @@ import gobj
 from button import Button
 import menu_state
 import horz_state
+import highscore
 
 canvas_width = 1120
 canvas_height = 630
@@ -14,10 +15,13 @@ def start(theme):
     gfw.push(horz_state)
 
 def menuStart(theme):
-    with open('res/ScoreFile.txt', 'a') as f:
+    highscore.add(str(horz_state.score))
+
+
+    #with open('res/ScoreFile.txt', 'a') as f:
         #print(horz_state.score)
-        f.write(str(horz_state.score)+"\n")
-    f.close()
+        #f.write(str(horz_state.score)+"\n")
+    #f.close()
 
     menu_state.theme = theme
     gfw.push(menu_state)
@@ -41,6 +45,7 @@ def build_world():
 
 def enter():
     build_world()
+    highscore.load()
 
 def update():
     gfw.world.update()

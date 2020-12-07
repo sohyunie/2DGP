@@ -235,12 +235,12 @@ class Player:
             self.cookie_index = 0
         else:
             cookie = self.cookie_chars[self.cookie_index]
-            sheet = '../최종프로젝트-res/out/%s.png' % cookie["id"]
+            sheet = 'res/out/%s.png' % cookie["id"]
             gfw.image.unload(sheet)
             self.cookie_index = (self.cookie_index + diff) % len(self.cookie_chars)
 
         cookie = self.cookie_chars[self.cookie_index]
-        sheet = '../최종프로젝트-res/out/%s.png' % cookie["id"]
+        sheet = 'res/out/%s.png' % cookie["id"]
         self.image = gfw.image.load(sheet)
         global PLAYER_SIZE
         prev_size = PLAYER_SIZE
@@ -256,3 +256,15 @@ class Player:
         self.cookie_name = cookie["name"]
         self.cookie_time = 0
 
+
+    def reset():
+        self.pos = 150, get_canvas_height() // 2
+        self.delta = 0, 0
+        # self.image = gfw.image.load(gobj.res('cookie.png'))
+        self.time = 0
+        self.FPS = 10
+        self.mag = 1
+        self.mag_speed = 0
+        # self.anims = Player.ANIMS_11x6
+        self.change_image(0)
+        self.state = Player.RUNNING

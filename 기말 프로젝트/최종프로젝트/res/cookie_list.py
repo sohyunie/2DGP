@@ -6,7 +6,7 @@ icon_cmd = "curl 'https://www.spriters-resource.com/resources/sheet_icons/%s/%s.
 sheet_cmd = "curl 'https://www.spriters-resource.com/resources/sheets/%s/%s.png' > out/%s_sheet.png"
 
 chars = []
-with open('out/cookierun.html', 'r') as f:
+with open('res/out/cookierun.html', 'r') as f:
     while True:
         str = f.readline()
         if not str: break
@@ -19,6 +19,6 @@ with open('out/cookierun.html', 'r') as f:
         print(sheet_cmd % (grade, number, number))
         # print(grade, number, name)
 
-with open('out/cookies.json', 'w') as f:
+with open('res/out/cookies.json', 'w') as f:
     json.dump(chars, f, indent=2)
 

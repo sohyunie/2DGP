@@ -4,9 +4,9 @@ from pico2d import *
 import gobj
 from player import Player
 from background import HorzScrollBackground
-from platform import Platform
 from jelly import Jelly
 from heart import Heart
+from platform import *
 import pickle
 import stage_gen
 from button import Button
@@ -15,12 +15,13 @@ import gameover_state
 canvas_width = 1120
 canvas_height = 630
 score = 0
-heart = 10
+heart = 1
 def start(theme):
     gameover_state.theme = theme
     gfw.push(gameover_state)
 
 def enter():
+    print('horz_state enter()');
     #global bg_music
     #bg_music = load_wav(gobj.res('sound/InGameMusic.wav'))
     #bg_music.set_volume(20)
@@ -71,7 +72,7 @@ def check_items():
             jellySound.set_volume(10)
             jellySound.play()
             score += 10
-            print(score)
+            #print(score)
             gfw.world.remove(item)
             break
 
@@ -81,8 +82,8 @@ def check_obstacles():
         if enemy.hit: continue
         if gobj.collides_box(player, enemy):
             heart -= 1
-            print(heart)
-            print('Hit', enemy)
+            #print(heart)
+            #print('Hit', enemy)
             enemy.hit = True
     if heart <= 0:
         paused = True
@@ -100,9 +101,6 @@ def draw():
         heartObj = Heart(1095 - (i * 50), 605)
         heartObj.draw()
 
-    #with open('res/ScoreFile.txt', 'w') as f:
-    #    f.write(score+"\n")
-    #f.close()
 def handle_event(e):
     # prev_dx = boy.dx
     if e.type == SDL_QUIT:
