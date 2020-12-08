@@ -1,6 +1,6 @@
 import gfw
 from pico2d import *
-from platform import *
+from platform import Platform
 from jelly import Jelly
 import gobj
 from factory import Factory

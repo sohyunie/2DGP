@@ -29,9 +29,9 @@ def build_world():
     gfw.world.add(gfw.layer.ui, btn)
 
 def start(theme):
-    global bg_music
-    bg_music.stop()
-    del bg_music
+    #global bg_music
+    #bg_music.stop()
+    #del bg_music
     gfw.world.remove(highscore)
     horz_state.theme = theme
     gfw.push(horz_state)
