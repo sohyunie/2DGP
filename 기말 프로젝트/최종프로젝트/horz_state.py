@@ -6,7 +6,7 @@ from player import Player
 from background import HorzScrollBackground
 from jelly import Jelly
 from heart import Heart
-from platform import Platform
+from pltfrm import Platform
 import pickle
 import stage_gen
 from button import Button
