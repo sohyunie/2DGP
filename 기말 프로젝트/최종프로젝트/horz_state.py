@@ -15,7 +15,7 @@ import gameover_state
 canvas_width = 1120
 canvas_height = 630
 score = 0
-heart = 1
+heart = 10
 def start(theme):
     gameover_state.theme = theme
     gfw.push(gameover_state)

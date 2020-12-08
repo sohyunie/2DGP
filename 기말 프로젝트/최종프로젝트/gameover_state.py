@@ -16,13 +16,6 @@ def start(theme):
 
 def menuStart(theme):
     highscore.add(str(horz_state.score))
-
-
-    #with open('res/ScoreFile.txt', 'a') as f:
-        #print(horz_state.score)
-        #f.write(str(horz_state.score)+"\n")
-    #f.close()
-
     menu_state.theme = theme
     gfw.push(menu_state)
 
